@@ -1,10 +1,11 @@
 package db.rest;
 
-import db.repository.OrderRepo;
-import db.repository.RestaurantRepo;
+import db.entity.Restaurant;
 import db.services.OrderPopulator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collection;
 
 @CrossOrigin
 @RestController
@@ -16,7 +17,12 @@ public class AdminController {
 
     @GetMapping("/orders/populate")
     public String getById(@RequestParam("quantity") int quantity) {
+        return "Total amount of orders in database : " + populator.populateOrders(quantity);
+    }
 
-        return "Total amount of orders in database : "+ populator.populateOrders(quantity);
+    @GetMapping("/restaurants/info")
+    public Collection<Restaurant> getAllRestaurantsInfo() {
+
+        return populator.getRestaurantInfo();
     }
 }

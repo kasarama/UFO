@@ -88,4 +88,8 @@ public class OrderPopulator {
         restNoMenu.forEach(integer -> System.out.print(integer + ", "));
         return orderRepo.count();
     }
+
+    public Collection<Restaurant> getRestaurantInfo() {
+        return restaurantRepo.getAllRestaurantsInfo();
+    }
 }

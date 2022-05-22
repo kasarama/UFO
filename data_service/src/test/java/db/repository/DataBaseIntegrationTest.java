@@ -102,21 +102,21 @@ public class DataBaseIntegrationTest {
 
     @Test
     void gateMenuTest() {
-        Restaurant r = repoRest.findByNameWithOpeningHoursAndManu("Pizza Mama Mia");
+        Restaurant r = repoRest.findByNameWithOpeningHoursAndMenu("Pizza Mama Mia");
         assertEquals(1, r.getMenu().size());
     }
 
     @Test
     void getOpeningHoursTest() {
-        for (OpeningHours o : repoRest.findByNameWithOpeningHoursAndManu("Pizza Mama Mia").getOpeningHours()) {
+        for (OpeningHours o : repoRest.findByNameWithOpeningHoursAndMenu("Pizza Mama Mia").getOpeningHours()) {
             System.out.println(o.toString());
         }
-        assertEquals(2, repoRest.findByNameWithOpeningHoursAndManu("Pizza Mama Mia").getOpeningHours().size());
+        assertEquals(2, repoRest.findByNameWithOpeningHoursAndMenu("Pizza Mama Mia").getOpeningHours().size());
     }
 
     @Test
     void saveOrder() {
-        Restaurant restaurant = repoRest.findByNameWithOpeningHoursAndManu("Pizza Mama Mia");
+        Restaurant restaurant = repoRest.findByNameWithOpeningHoursAndMenu("Pizza Mama Mia");
         Item item = (Item) restaurant.getMenu().stream().toArray()[0];
         Order order = new Order(restaurant, null);
         order.addItem(item);
@@ -146,7 +146,7 @@ public class DataBaseIntegrationTest {
 
     @Test
     public void sendOrderWithCourier() {
-        Restaurant restaurant = repoRest.findByNameWithOpeningHoursAndManu("Pizza Mama Mia");
+        Restaurant restaurant = repoRest.findByNameWithOpeningHoursAndMenu("Pizza Mama Mia");
         Item item = (Item) restaurant.getMenu().stream().toArray()[0];
         Order order = new Order(restaurant, null);
         Order newOrder = repoOrder.save(order);
@@ -157,7 +157,7 @@ public class DataBaseIntegrationTest {
 
     @Test
     public void makeOrderAsCustomer() {
-        Restaurant restaurant = repoRest.findByNameWithOpeningHoursAndManu("Pizza Mama Mia");
+        Restaurant restaurant = repoRest.findByNameWithOpeningHoursAndMenu("Pizza Mama Mia");
         Item item = (Item) restaurant.getMenu().stream().toArray()[0];
         Customer customer = repoCustomer.findById(initCustomerId).get();
         Order order = new Order(restaurant, customer);
@@ -182,7 +182,7 @@ public class DataBaseIntegrationTest {
         customer.setUser(user);
         Courier courier = repoCourier.findById(initCourierId).get();
         courier.setUser(user);
-        Restaurant restaurant = repoRest.findByNameWithOpeningHoursAndManu("Pizza Mama Mia");
+        Restaurant restaurant = repoRest.findByNameWithOpeningHoursAndMenu("Pizza Mama Mia");
         restaurant.setUser(user);
         courier = repoCourier.save(courier);
         customer = repoCustomer.save(customer);
